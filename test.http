@@ -1,0 +1,12 @@
+GET http://localhost:3000
+
+###
+
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "name": "billy",
+    "age": {{$randomInt 10 500}},
+    "city": "korat"
+}

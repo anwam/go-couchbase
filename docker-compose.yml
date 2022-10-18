@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  gocouchbase:
+    image: local/go-couchbase
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - cb_network
+    depends_on:
+      - couchbasedb
+  
+  couchbasedb:
+    image: couchbase:latest  
+    ports:
+      - 8091-8096:8091-8096
+      - 11210-11211:11210-11211
+    volumes:
+      - ./couchbase_data:/opt/couchbase/var
+    networks:
+      - cb_network
+
+networks:
+  cb_network:
+    driver: bridge
